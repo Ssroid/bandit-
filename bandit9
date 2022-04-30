@@ -1,0 +1,32 @@
+Level Goal
+The password for the next level is stored in the file data.txt in one of the few human-readable strings, preceded by several ‘=’ characters.
+
+Commands you may need to solve this level
+grep, sort, uniq, strings, base64, tr, tar, gzip, bzip2, xxd
+
+$ sort data.txt 를 해도 답이없다.. ㅋㅋ
+
+$ file data.txt 를 하니 데이터파일이라 텍스트가 안읽어졌다 grep 을 쓸거면은 -a를 사용해야한다..
+
+$ cat data.txt | grep -a =
+
+이걸해도 소용이없네..
+
+https://itguny04.tistory.com/39?category=455389 의 도움을 받았다.
+왜 cat이나 sort는 안돼는 거지 , 아마 stings가 문자열을 찾아주고 grep -a = 이걸로 =가 있는 문자열을 찾아준다.
+
+$ strings data.txt | grep -a = 
+
+========== the*2i"4
+=:G e
+========== password
+<I=zsGi
+Z)========== is
+A=|t&E
+Zdb=
+c^ LAh=3G
+*SF=s
+&========== truKLdjsbJ5g7yyJ2X2R0o3a5HQJFuLk
+S=A.H&^
+
+따라서 키값은 truKLdjsbJ5g7yyJ2X2R0o3a5HQJFuLk 이거겠지

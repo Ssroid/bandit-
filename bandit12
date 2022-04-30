@@ -1,0 +1,43 @@
+$ ssh bandit12@bandit.labs.overthewire.org -p 2220 
+패스워드 : 5Te8Y4drgCRfCx8ugdwuEX8KFC6k2EUu
+
+문제
+The password for the next level is stored in the file data.txt, which is a hexdump of a file that has been repeatedly compressed. 
+For this level it may be useful to create a directory under /tmp in which you can work using mkdir. For example: mkdir /tmp/myname123. 
+Then copy the datafile using cp, and rename it using mv (read the manpages!)
+
+//구글 번역기
+vel은 반복적으로 압축된 파일의 16진 덤프인 data.txt 파일에 저장됩니다. 
+이 수준의 경우 mkdir을 사용하여 작업할 수 있는 디렉토리를 /tmp 아래에 만드는 것이 유용할 수 있습니다. 예: mkdir /tmp/myname123. 
+그런 다음 cp를 사용하여 데이터 파일을 복사하고 mv를 사용하여 이름을 바꿉니다(맨페이지 읽기!)
+
+$ mkdir /tmp/myname123 
+을 했더니 이미 있는 파일이라 생성할수 없다고 하니..
+$ cd /tmp/myname123
+$ file *
+해보니 파일들이 있고 파일들 내용에 data9가 유일하게 txt파일이길래 조사하니 패스워드가 나오네..? 머여 (편법은 하지말자..)
+
+다시 원래대로 
+$ mkdir /tmp/kali    #디렉토리 생성 
+$ cp data.txt /tmp/kali/data.txt    #현재 위치 파일 data.txt를 /tmp/kali 디렉토리에 data.txt 파일로 생성
+$ mv data.txt data1.txt    #mv명령어는 파일을 이름변경 혹은 여러개의 파일을 디렉토리로 이동가능 함( $mv data.txt data1.txt  /dir1    #이런식)
+를 했지만.. 
+xxd 명령어가 hexdump를 바이너리파일로 바꿀수 있다고 한다 
+$ xxd -r data1.txt > binary    #data1.txt파일을 binay명으로 바이너리파일을 생성
+$ file binary    #조사한 결과 gzip으로 압축되어있음
+$ mv binary binary.gz   #gzip -d를 하려면 .gz가 되어있어야함
+$ file binary     #조사결과 bzip2으로 압축되어있음
+$ mv binary binary.bz2   # bz압축파일로 변경
+$ bzip2 -d binary.bz2   
+
+이렇게 하니 POSIX tar archive (GNU)  #tar archive 가 여러개의 파일로 묶었다는 뜻... 어우
+$ tar -xvf binary   # 이후에 반복적으로 압축이름변경이랑 반복하여 마지막파일 data8.bin까지 도착
+
+이후에 압축해제하고 나니 텍스트파일이여서 cat으로 조사한결과 키 값 확인.
+The password is 8ZjyCRiBWFYkneahHwxCv3wb2a1ORpYL
+
+
+
+
+
+

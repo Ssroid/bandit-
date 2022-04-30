@@ -1,0 +1,17 @@
+$ ssh bandit11@bandit.labs.overthewire.org -p 2220
+
+문제 
+The password for the next level is stored in the file data.txt, where all lowercase (a-z) and uppercase (A-Z) letters have been rotated by 13 positions
+다음 레벨의 비밀번호는 data.txt 파일에 저장됩니다. 여기서 모든 소문자(a-z) 및 대문자(A-Z)가 13자리 회전되었습니다.
+
+$ cat data.txt 
+Gur cnffjbeq vf 5Gr8L4qetPEsPk8htqjhRK8XSP6x2RHh
+
+tr : 문자를 변환을 해주는 것 
+
+$ cat data.txt | tr 'A-Za-z' 'N-ZA-Mn-za-m'
+A-Z => N-Z, A-M  // a-z =>n-z,a-m
+
+The password is 5Te8Y4drgCRfCx8ugdwuEX8KFC6k2EUu
+
+13개씩 뒤로 치환

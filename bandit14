@@ -1,0 +1,25 @@
+
+문제
+The password for the next level can be retrieved by submitting the password of the current level to port 30000 on localhost.
+번역
+다음 수준의 암호는 현재 수준의 암호를 localhost의 포트 30000에 제출하여 검색할 수 있습니다.
+
+먼 소리인건지.. 검색해서 localhost를 해보니 루프백 호스트명으로 127.0.0.1 이라고한다..
+
+$ ssh bandit15@localhost -p 30000
+실패...
+$ ssh bandit15@127.0.0.1 -p 30000   #이것도 실패 대체 어떻해 접근해여할지..
+
+도움 요청!
+$ telnet localhost 30000   #telnet으로 원격으로 localhost 에 30000 포트에 접속  하여 bandit14의 키값을 입력
+
+bandit14@bandit:~$ telnet localhost 30000
+Trying 127.0.0.1...
+Connected to localhost.
+Escape character is '^]'.
+4wcYUJFw0k0XLShlDzztnTBHiqxU3b3e
+Correct!
+BfMYroe26WYalil77FoDi9qh59eK5xNr
+
+음 이유를 잘 모르지만 키값은 구했다..?
+키값 : BfMYroe26WYalil77FoDi9qh59eK5xNr

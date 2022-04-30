@@ -1,0 +1,28 @@
+ssh bandit13@bandit.labs.overthewire.org -p 2220
+
+문제 
+The password for the next level is stored in /etc/bandit_pass/bandit14 and can only be read by user bandit14. 
+For this level, you don’t get the next password, but you get a private SSH key that can be used to log into the next level. 
+Note: localhost is a hostname that refers to the machine you are working on
+
+번역>
+다음 레벨의 비밀번호는 /etc/bandit_pass/bandit14에 저장되며 bandit14 사용자만 읽을 수 있습니다. 
+이 수준의 경우 다음 암호를 얻지는 못하지만 다음 수준에 로그인하는 데 사용할 수 있는 개인 SSH 키를 얻습니다. 
+참고: localhost는 작업 중인 시스템을 나타내는 호스트 이름입니다.
+
+$ cat sshkey.private   #파일을 조사하니 안에 먼지모를 영어가 많다..
+$ cat /etc/bandit_pass/bandit14   #이파일안에 키가 있다는데 거부되었다..
+$ ls -al /etc/bandit_pass/bandit14   #-r-------- 1 bandit14 bandit14 33 May  7  2020 /etc/bandit_pass/bandit14  (읽기가 bandit14만 가능)
+
+음 어떻해 bandit14계정으로 하지..
+
+$ssh -i sshkey.private bandit14@localhost  #-i 로 파일 ssh개인키로 bandit14 계정의 localhost로 하니 bandit14으로 로그인!
+
+이걸로 바로 bandit14로 들어가졌다 이후에 cat /etc/bandit_pass/bandit14 을 하니 
+키값 : 4wcYUJFw0k0XLShlDzztnTBHiqxU3b3e
+
+결론 개인키값을 알면은 ssh에서 해당 계정으로 로그인이 가능한가 보다.. 맞겠지..?
+
+
+
+

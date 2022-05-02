@@ -1,0 +1,19 @@
+문제>
+There is a setuid binary in the homedirectory that does the following: 
+it makes a connection to localhost on the port you specify as a commandline argument. 
+It then reads a line of text from the connection and compares it to the password in the previous level (bandit20). 
+If the password is correct, it will transmit the password for the next level (bandit21).
+
+NOTE: Try connecting to your own network daemon to see if it works as you think\
+
+명령어: ssh, nc, cat, bash, screen, tmux, Unix ‘job control’ (bg, fg, jobs, &, CTRL-Z, …)
+번역>
+홈 디렉터리에 다음 작업을 수행하는 setuid 이진 파일이 있습니다.
+명령줄 인수로 지정한 포트의 localhost에 연결합니다.
+그런 다음 연결에서 텍스트 줄을 읽고 이전 수준(bandit20)의 암호와 비교합니다.
+암호가 올바르면 다음 수준(bandit21)의 암호를 전송합니다.
+
+참고: 자신의 네트워크 데몬에 연결하여 원하는 대로 작동하는지 확인하십시오.
+
+풀이>
+음 지난풀이랑 마찬가지로 setuid로 설정된

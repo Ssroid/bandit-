@@ -16,4 +16,35 @@ NOTE: Try connecting to your own network daemon to see if it works as you think\
 참고: 자신의 네트워크 데몬에 연결하여 원하는 대로 작동하는지 확인하십시오.
 
 풀이>
-음 지난풀이랑 마찬가지로 setuid로 설정된
+$ openssl s_client -connect localhost:[port] 지난번과 같이 하는건가?
+근데 지정한포트가 머지 2220인건가?
+$ cat /etc/bandit_pass/bandit20    # GbKksEFF4yrVs6il55v6gwY5aVje5f0j
+
+$ ./suconnect openssl s_client -connect localhost:2220 
+이걸해도 소용이없다.. 음 도움필요!
+
+첫째 열려있는 포트를 확인하기!
+$ nmap localhost   # 22, 113, 30000 번의 포트가 열려있다.
+$ openssl s_client -connect localhost:113
+이짓을 했지만 특별한 수확은 없다.. 이담은 어케해야하지..
+
+nc : $nc(netcat) [옵션] [호스트명] [포트] , 넷켓은 TC나 UDP프로토콜을 사용하는 네트워크에서
+데이터를 읽고 쓰는 유틸리티 프로그램
+
+두개의 터미널을 실행시키고 
+$ nc -l -p 1234 localhost   #호스트 localhost로 포트 1234 로 열린다.
+
+다른 터미널로 
+$ nc localhost 1234    #하면은 서로 연결이 된다.
+이후에 2번 터미널로 $ ./suconnect 1234
+을 하면은 1234포트로 파일을 실행하고 1번 터미널에 값을 bandit20키를 넣으면 패스워드를 알려줌
+
+GbKksEFF4yrVs6il55v6gwY5aVje5f0j
+Read: GbKksEFF4yrVs6il55v6gwY5aVje5f0j
+Password matches, sending next password
+
+1번터미널에 키값을 알려줌 : gE269g2h3mw3pwgrj0Ha9Uoqen1c9DGr
+
+
+
+

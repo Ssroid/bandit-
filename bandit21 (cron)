@@ -1,0 +1,25 @@
+문제>
+A program is running automatically at regular intervals from cron, the time-based job scheduler. 
+Look in /etc/cron.d/ for the configuration and see what command is being executed.
+
+번역>
+프로그램은 시간 기반 작업 스케줄러인 cron에서 일정한 간격으로 자동으로 실행됩니다.
+/etc/cron.d/에서 구성을 찾고 실행 중인 명령을 확인합니다.
+
+풀이>
+cron : 특정한 시간에서 특정 시간때마다 어떤 작업을 자동으로 수행하게 해주는 명령어
+crontab: root권한이 필요한 경로로 /etc/cron.d 폴더 안에 존재 , cron은 crontab을 실행
+crontab은 안의 텍스트로 cron으로 실행하는 것
+
+도움 요청!
+$ ls /etc/cron.d    #을 하니 여러개의 텍스트 파일들이다
+$ cd /etc/cron.d 
+$ cat cronjob_bandit22     #어떤 문장이 있는데 해당파일로 가본다.
+$ file /usr/bin/cronjob_bandit22.sh   #텍스트 파일이라고 나온다.
+$ cat /usr/bin/cronjob_bandit22.sh    #안의 키값같은게 보인다.
+
+#!/bin/bash
+chmod 644 /tmp/t7O6lds9S0RqQh9aMcz6ShpAoZKF7fgv
+cat /etc/bandit_pass/bandit22 > /tmp/t7O6lds9S0RqQh9aMcz6ShpAoZKF7fgv
+
+이렇게 하는게 맞는건가..?

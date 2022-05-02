@@ -23,3 +23,8 @@ chmod 644 /tmp/t7O6lds9S0RqQh9aMcz6ShpAoZKF7fgv
 cat /etc/bandit_pass/bandit22 > /tmp/t7O6lds9S0RqQh9aMcz6ShpAoZKF7fgv
 
 이렇게 하는게 맞는건가..?
+
+$ file /tmp/t7O6lds9S0RqQh9aMcz6ShpAoZKF7fgv    #텍스트파일
+$ cat /tmp/t7O6lds9S0RqQh9aMcz6ShpAoZKF7fgv    # 키 값 : Yk7owGAcWjwMVRwrTesJEwB7WVOiILLI
+
+키 값은 나왔는데 결론이 이건가?

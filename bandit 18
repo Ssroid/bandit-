@@ -1,0 +1,26 @@
+들어가는 패스워드 : kfBf3eYk5BPBRzwjqutbbfE887SVc5Yd
+
+문제>
+The password for the next level is stored in a file readme in the homedirectory. 
+Unfortunately, someone has modified .bashrc to log you out when you log in with SSH.
+
+번역>
+다음 단계의 암호는 홈 디렉토리의 파일 readme에 저장됩니다. 
+안타깝게도 SSH로 로그인할 때 로그아웃하도록 다른 사용자가 .bashrc를 수정했습니다.
+
+풀이>
+패스워드를 입력해도 바로 나가진다 ... 음 .bashrc가 머지
+쉘이란게 운영체제의 껍데기 부분으로 커널에 들어가기전 명령어를 해석해주는 역할...?
+음 일단 ssh로 로그인하면은 로그아웃시킨다는 걸로 됐다는건가..?
+.bashrc 는 non-login shell일때 수행이고 .bash_profile은 login shell일떄 수행
+리눅스 부팅시 설정해둔 함수나 alias환경변수를 적용한다.. ssh로 들어가면 .bashrc가 설정해준함수로
+로그아웃되게 하는거 같다. 그럼 어떻해 해야하나.. |명령어로 동시에 가능한가?
+블로그 : https://losskatsu.github.io/os-kernel/bashrc/#
+
+$ ssh bandit18@bandit.labs.overthewire.org -p 2220 [추가명령어]
+를 하면은 명령어를 수행하고 로그아웃이 된다. 음 | 명령어를 쓰면은 현재 내가 있는 곳에 명령어가 실행
+되고 |를 붙이지 않고 쓰면은 해당 ssh로 들어가서 명령어 수행으로 이어진다.
+$ ssh bandit18@bandit.labs.overthewire.org -p 2220 cat readme
+
+키값 : IueksS7Ubh8G3DCwVzrTd8rAVOwq3M5x
+

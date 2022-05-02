@@ -1,0 +1,27 @@
+문제
+There are 2 files in the homedirectory: passwords.old and passwords.new. 
+The password for the next level is in passwords.new and is the only line that has been changed between passwords.old and passwords.new
+
+NOTE: if you have solved this level and see ‘Byebye!’ when trying to log into bandit18, this is related to the next level, bandit19
+
+번역
+홈 디렉토리에는 passwords.old와 passwords.new의 두 가지 파일이 있습니다. 
+다음 단계의 암호는 passwords.new에 있으며 passwords.old와 passwords.new 사이에서 변경된 유일한 행입니다.
+
+참고: 밴디트에 로그인하려고 할 때 이 수준을 해결한 후 '바이바이!'가 표시되면 다음 레벨인 밴디트19와 관련이 있습니다.
+
+음.. cat으로 조사한결과 passwords.new 와 .old가 대부분이 문자들이 비슷하다.. 명령어 ls, cat, grep, diff 가 있으니 안써본 diff가 머지?
+찾아보니 두개의 파일을 비교하여 무엇이 다른지 알려주는 명령어다.
+
+$ file [파일명]    #을 해보니 둘다 텍스트파일
+$ diff passwords.old passwords.new    #두개(문자열)를 비교
+
+42c42     (파일1의 42행과  파일2의 42행이 비교)
+< w0Yfolrc5bwjS4qw5mq1nnQi6mF03bii
+---
+> kfBf3eYk5BPBRzwjqutbbfE887SVc5Yd
+
+바꼇다. 이값이 키값인건가?
+
+이왜에도 검색하니 cmp(파일을 비교) , comm (같은거 확인)
+

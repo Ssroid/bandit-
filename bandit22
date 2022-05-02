@@ -5,3 +5,50 @@ Look in /etc/cron.d/ for the configuration and see what command is being execute
 NOTE: Looking at shell scripts written by other people is a very useful skill. 
 The script for this level is intentionally made easy to read. 
 If you are having problems understanding what it does, try executing it to see the debug information it prints.
+
+번역>
+프로그램은 시간 기반 작업 스케줄러인 cron에서 일정한 간격으로 자동으로 실행됩니다.
+/etc/cron.d/에서 구성을 찾고 실행 중인 명령을 확인합니다.
+
+참고: 다른 사람이 작성한 셸 스크립트를 보는 것은 매우 유용한 기술입니다.
+이 수준의 스크립트는 의도적으로 읽기 쉽게 만들어졌습니다.
+이 기능을 이해하는 데 문제가 있는 경우 이 기능을 실행하여 출력되는 디버그 정보를 확인하십시오.
+
+풀이>
+이전과 같은 방식으로 bandit23을 하니
+$ cat /usr/bin/cronjob_bandit23.sh
+텍스트 파일 #! : 이는 텍스트파일에 어떤 쉘로 스크립트를 읽은것인지 알려주는것 이 나오는 것은 경로명,
+스크립트에 들어있는 명령어들을 해석할 프로그램위치를 나타냄
+
+$ crontab -e 를 하지만 거부된다..
+-------------------------------------------
+#!/bin/bash
+
+myname=$(whoami)
+mytarget=$(echo I am user $myname | md5sum | cut -d ' ' -f 1)
+
+echo "Copying passwordfile /etc/bandit_pass/$myname to /tmp/$mytarget"
+
+cat /etc/bandit_pass/$myname > /tmp/$mytarget  # 변수명$myname 파일을  tmp/$myrarget에 파일 내용저장 혹은 덮어쓰기
+-------------------------------------------
+이 문장이 쉘스크립트라는 것이고 $ 는변수값을 사용할때 붙인다.
+ p.s 쉘 스크립트는 블로그 도움으로 하기
+ 
+ 쉘 스크립트에 나온 명령어를 실행해본다.
+ $ echo I am user $myname | md5sum | cut -d ' ' -f 1
+ 이것을 하니  7db97df393f40ad1691b6e1fb03d53eb  가 나왔다. 아마 사람들마다 다른값인가보다.
+ 정답은 $ echo I am user bandit23 | md5sum | cut -d ' ' -f 1   #음. $myname 이 아닌 입력값이 bandit23이다
+ 이 것을 하니 8ca319486bfbbc3663ea0fbe81326349 이 나왔다. 어음 문장을 md5로 암호화한다는 뜻인건가?
+ md5sum 은 체크섬으로 파이르이 무결성을 확인하는 방법, cut은 파일에서 원하는 필드만 뽑아서 보는것
+ 
+ $ cat /tmp/8ca319486bfbbc3663ea0fbe81326349   을 하니 
+ 의문은 /tmp 파일은 왜 ls가 안되는걸까..?
+ 
+ 
+ 키 값 : jc1udXuA1tiHqjIsL8yaapX5XIAI6i0n   
+ 
+ 
+ 
+ 
+
+

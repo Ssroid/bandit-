@@ -1,0 +1,35 @@
+문제>
+There is a git repository at ssh://bandit27-git@localhost/home/bandit27-git/repo. 
+The password for the user bandit27-git is the same as for the user bandit27.
+
+Clone the repository and find the password for the next level.
+
+번역>
+ssh://bandit27-git@localhost/home/bandit27-git/repo에 git 저장소가 있습니다.
+사용자 bandit27-git의 암호는 사용자 bandit27의 암호와 동일합니다.
+
+리포지토리를 복제하고 다음 수준의 암호를 찾습니다.
+
+풀이>
+커맨드에 git 이 있다. 조사해보자
+git 을 검색해도 음 원하는 정보가 아닌거같은데..
+
+$ ssh://bandit27-git@localhost/hme/bandit27-git/repo    #해도 소용이없다.. 음
+검색을 해도 모르겠다.ㅎ
+도움!
+
+git repository : 깃헙사이트에서 다운받는것
+git clone : 깃에서 다운받는것을 클론이라고 한다.
+
+$ git clone ssh://bandit27-git@localhost/hme/bandit27-git/repo   #영어가 주저리 나오는데 yes를한다
+비번을 입력하라는데 bandit27 키값을 넣으면 repo가 다운된다.
+
+$ ls    #하면은 repo파일이 추가된것을 확인할수 있다.
+$ file repo   #디렉토리인것을 확인할수 있고 README의 파일이 텍스트파일이다 읽어보자
+
+The password to the next level is: 0ef186ac70e04ea33b4c1853d2526fa2
+
+키값을 얻을수 있다.
+
+정리>
+git 사이트에서 다운하는 것을 clone 이라하며 파일다운로드라 생각하자.

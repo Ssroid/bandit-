@@ -1,0 +1,65 @@
+문제>
+Logging in to bandit26 from bandit25 should be fairly easy… The shell for user bandit26 is not /bin/bash, but something else.
+Find out what it is, how it works and how to break out of it.
+
+풀이>
+bandit 25에서 bandit 26에 로그인하는 것은 매우 쉬울 것입니다. 사용자 bandit26의 셸은 /bin/bash가 아니라 다른 것입니다.
+그것이 무엇인지, 어떻게 작동하는지, 그리고 어떻게 탈출하는지 알아보세요.
+
+풀이>
+지난번 ssh와 동일한것인줄 알고 진행했으나 실패..
+$ ssh bandit26@bandit.labs.overthewire.org -p 2220 -i bandit26.sshkey
+아무 반응이없다..
+
+도움!
+/etc/passwd :사용자의 어떤 쉘인지 알수 있다.
+/etc/shadow : 사용자 패스워드의 암호화된 해시값이 저장.? 되있는 듯
+/etc/login.defs  : 사용자 패스워드 암호화된 기법을 알수 있다.
+
+ps : $ whoami   #사용자의 이름을 알려준다. 
+     $ id       #내가 갖고 있는 권한을 알려준다.
+  
+  $ file /etc/passwd    # 텍스트파일이다.
+  $ cat /etc/passwd     # bandit26이 밑에처럼 나옴.
+  bandit26:x:11026:11026:bandit level 26:/home/bandit26:/usr/bin/showtext
+다른것들은 다 /bin/bash지만 여기는 /bin/showtext이다 . 쉘이 showtext라는건가?
+
+$ file /usr/bin/showtext   #POSIX shell script, ASCII text executable 일단 텍스트파일실행형식인데..
+$ cat usr/bin/showtext  
+-----
+#!/bin/sh
+
+export TERM=linux
+
+more ~/text.txt
+exit 0
+------ 
+
+
+$ ssh -i bandit26.sshkey bandit26@localhost  이것는 bandit26에 들어가지는데 왜 
+localhost는 들어가지고 bandit26@bandit.labs.overthewire -p 2220 는 안들어가지는 거지..?
+터미널의 크기를 줄여서 다시한번 명령어를 사용하니 
+완전히 끝나지 않고 도중에 서버가 끊기지 않는다.
+more 상태에서 v를 누르면 (vi편집 상태로 전환) vi상태동안은 지금 bandit26권한 소유자이다.
+$ :e /etc/bandit_pass/bandit26  #vi 상태에서 실행모드로 할시에 bandit26파일을 읽을수 있다.
+
+키 값 : 5czgV9L3Xx8JPOyRbXh6lQbmIOWvPT6Z
+
+vi 에서 :e의 기능을 아직 정확하게 모르겠다.
+
+이대로 bandit26을 접속하려해도 shell이 showtext로 되있어서 접속이 끊긴다. 쉘을 바꿔야한다.
+
+키값이 있는 자리에 
+$ :set shell=/bin/bash   #그냥 적고 엔터하고 
+$ :shell      #bandit26으로 접속이 된다.
+
+
+정보>
+$ cat /etc/shells    #리눅스이 쉘 종류보는 방법
+more : 파일 내용을 확인 하는 명령어로 화면 단위로 나타냄 
+특이한점은 안의 내용물이 화면크기도 크면은 사용자가 입력할때 동안 기다린다는것 
+이를 이용하자! 터미널의 크기를 줄이자!
+
+  
+     
+     

@@ -1,0 +1,55 @@
+문제>
+There is a git repository at ssh://bandit29-git@localhost/home/bandit29-git/repo. 
+The password for the user bandit29-git is the same as for the user bandit29.
+
+Clone the repository and find the password for the next level.
+
+풀이>
+지난번과 같은 형식인가보다..
+
+지난번처럼 해도 git log -p를해도 수정된 내역을 잘모르겠다.
+음.. git 명령어가 머가 더있을라나.
+
+#git --help 
+examine the history and state (see also: git help revisions)
+   bisect     Use binary search to find the commit that introduced a bug
+   grep       Print lines matching a pattern
+   log        Show commit logs
+   show       Show various types of objects
+   status     Show the working tree status
+   
+log는 안돼니깐.. show나 status 일라나?
+
+   branch     List, create, or delete branches
+   checkout   Switch branches or restore working tree files
+   commit     Record changes to the repository
+   diff       Show changes between commits, commit and working tree, etc
+   merge      Join two or more development histories together
+   rebase     Reapply commits on top of another base tip
+   tag        Create, list, delete or verify a tag object signed with GPG
+
+하나씩 해보자.
+
+$ git branch -a    #git 에 사용된덧 모든 로컬, 원격 branch를 확인할수 있다.
+git checkout : 수정된 내용이 마음에 안들거나 동작하지 않을때 다른버전으로 돌아갈때 사용
+------
+master
+  remotes/origin/HEAD -> origin/master
+  remotes/origin/dev
+  remotes/origin/master
+  remotes/origin/sploits-dev
+-------
+$ git checkout remotes/origin/dev    #해당버전으로 돌아간다는 건가..?
+$ git log -p    # 수정전 버전이 알려준다 
+
+-- password: <no passwords in production!>
++- password: 5b90576bedb2cc04c86a9e924ce42faf
+
+키값이 나왔다.. 대충 어느 형식인지는 이해돼지만 정확하게 왜 이게 돼는지를 모르겠다..
+
+블로그의 도움을 많이받는다.. 이렇게 공부해도 되나..?
+
+의문>
+git production이 무엇이냐?
+git status 는 멀알아볼수 있는 것이냐
+git branch 는 

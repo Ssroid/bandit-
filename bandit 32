@@ -1,0 +1,40 @@
+문제>
+After all this git stuff its time for another escape. Good luck!
+
+Commands you may need to solve this level
+sh, man
+
+번역>
+이 모든 것이 끝난 후에 또 다른 탈출을 위한 시간이다. 행운을 빕니다.
+
+이 수준을 해결하는 데 필요한 명령
+sh, man
+
+풀이>
+들어가보면 무언가 이전이랑 다르다 입력하는게 >> 로 변했다 .$이 아니라 
+UPPERCASE SHELL 를 검색해도 별다른 소득이없다. 쉘이랑 관계있는건가 ? paaswd
+uppercase : 대문자 라는 뜻
+
+$ cat /etc/passwd 를 하려고 해도 
+-------
+sh: 1: CAT: not found
+------
+sh이란 쉘을 사용하는 건가? sh : 쉘
+한가지 특징이 기존의 명령어들을 입력을 하면 대문자로 인식이 됀다
+$ help -> HELP   , $ echo -> ECHO 
+man 은 무슨명령어 일까 : 명령의 사용법 혹은 파일에 대한 설명을 확인하는 명령어
+$ man [명령어]   #해당명령어를 상세하게 알려주는듯
+
+블로그의 도움으로 명령어 $0 를 이용하면은 bash 쉘이 실행되서 원래처럼사용이 가능하다.
+
+>>$0
+$ whoami   #자신이 로그인한 사용자명을 알수있다.bandit33
+$ cat /etc/bandit_pass/bandit33
+
+키값 : c9c3199ddf4121b10cf581a98d51caee
+
+번외>
+ls를 하면은 uppershell 파일이 있다. ELF파일로 실행파일이다.
+아마 이 쉘이 실행돼서 되는거 같은데 아직 정확하게 $0 를 하면은 bash 쉘이 실행되는지 모르겠다.
+
+블로그>

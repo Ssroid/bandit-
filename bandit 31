@@ -1,0 +1,66 @@
+문제>
+There is a git repository at ssh://bandit31-git@localhost/home/bandit31-git/repo. 
+The password for the user bandit31-git is the same as for the user bandit31.
+
+Clone the repository and find the password for the next level.
+
+풀이>
+일단 다운로드를 해보자 
+
+bandit30 패스워드 : 47e603bb428404d265f59c42920d81e5
+------
+This time your task is to push a file to the remote repository.
+
+Details:
+    File name: key.txt
+    Content: 'May I come in?'
+    Branch: master
+------
+이번 임무는 원격저장소에서 파일을 push하는 것이라.. git에 push 명령어가 있고 
+remote repository 가 있는거 같던데 조사해보자.
+
+검색을 하니 하고 있는 디렉토리가 Working Direct
+이 다음 git add 에 git commit -> git push 순으로 remote 까지 가는 거같다.
+
+저 파일을 만들고 push를 하라는 것인가?
+
+$ vi key.txt   #내용을 입력하고 cat으로 됐는지 확인
+
+git push [저장소 별] [현재 브랜치명]
+일단 시도해보자
+$ git push key.txt master    # 실패
+바로 입장이 안돼는건가? add > commit -> push를 해야하나?
+$ git add key.txt   을 하니 보내고 싶으면은 -f 명령어를 사용하라고 한다. 
+$ git commit key.txt 를 해도 소용이없다..
+
+도움!
+$ git status 로 git 의 파일상태를 확인한다.han
+'Change to be committed:' 목록에 있는 파일들은 staged 상태라는 것을 의미
+$ git commit -m "커밋메세지"  : 스테이지(인덱스 영역의 파일을 커밋한다.)
+현재 스테이지에 key.txt 파일이 있으니 보내보자.
+
+$ git commit -m "key"
+-----
+[master e284090] key
+ 1 file changed, 2 insertions(+)
+ create mode 100644 key.txt
+------
+을 하고 git status 로 확인하니 먼가가 달라졌다.
+
+$ git push origin master   #먼가가 작동이 된다. 키값을 넣어보자.
+하지만 먼가 실패다. 32키값을 주지 않았다.
+
+알고보니 난 txt 파일에 따옴표까지 넣었다. 따옴표까지가 아니었던것이다.. 수정한다
+$ git add key.txt
+$ git status   #올라간것을 확인
+$ git commit -m "keyps"
+$ git push origin master   #값이랑 wrong!둘다 뜬다. 아마 두 파일둘다 push 돼는거 같다.
+
+키값 : 56a9bf19c63d650ce78e6ec0354ee45e
+
+블로그>
+https://blog.naver.com/csibears01/222492109571
+
+https://blog.naver.com/wktnwjd222/222620676641
+
+https://blog.naver.com/cdn06079/222705764229
